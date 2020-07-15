@@ -6,26 +6,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-//Êı¾İ¿âÁ¬½Ó
+//æ•°æ®åº“è¿æ¥
 public class DBcon {
 	public static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-	public static final String URL = "jdbc:mysql://localhost:3306/pas?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";// Á¬½ÓÊı¾İ¿âµÄµØÖ·
-	public static final String USER = "root";// Êı¾İ¿âÓÃ»§Ãû
-	public static final String PWD = "lyp82nlf.";// Êı¾İ¿âÃÜÂë
+	public static final String URL = "jdbc:mysql://localhost:3306/pas?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";// è¿æ¥æ•°æ®åº“çš„åœ°å€
+	public static final String USER = "root";// æ•°æ®åº“ç”¨æˆ·å
+	public static final String PWD = "Push-Your-PASSWORD.";// æ•°æ®åº“å¯†ç 
 	private Connection con;
 	private PreparedStatement ps;
 	private ResultSet rs;
 
 	public DBcon() {
 		try {
-			// ¼ÓÔØÇı¶¯³ÌĞò
+			// åŠ è½½é©±åŠ¨ç¨‹åº
 			Class.forName(DRIVER);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
-	// ·µ»ØÊı¾İ¿âÁ¬½Ó
+	// è¿”å›æ•°æ®åº“è¿æ¥
 	public Connection getCon() {
 		try {
 			con = DriverManager.getConnection(URL, USER, PWD);
@@ -35,7 +35,7 @@ public class DBcon {
 		return con;
 	}
 
-	// ¹Ø±Õ¿ªÆôµÄ×ÊÔ´
+	// å…³é—­å¼€å¯çš„èµ„æº
 	public void closeAll() {
 		if (rs != null) {
 			try {
@@ -58,12 +58,12 @@ public class DBcon {
 			}
 	}
 
-	// prasÊÇ²ÎÊıÁĞ±í sqlÊÇ¶ÔÓ¦µÄsqlÖ´ĞĞÓï¾ä ·µ»ØÖµÊÇÊÕµ½Ó°ÏìµÄÌõÊı
+	// prasæ˜¯å‚æ•°åˆ—è¡¨ sqlæ˜¯å¯¹åº”çš„sqlæ‰§è¡Œè¯­å¥ è¿”å›å€¼æ˜¯æ”¶åˆ°å½±å“çš„æ¡æ•°
 	public int update(String sql, Object... pras) {
 		int resu = 0;
 		con = getCon();
 		try {
-			ps = con.prepareStatement(sql);// ½ÓÊÕsqlÓï¾ä
+			ps = con.prepareStatement(sql);// æ¥æ”¶sqlè¯­å¥
 			if (pras != null) {
 				for (int i = 0; i < pras.length; i++) {
 					ps.setObject(i + 1, pras[i]);
@@ -79,7 +79,7 @@ public class DBcon {
 		return resu;
 	}
 
-	// ½á¹û¼¯
+	// ç»“æœé›†
 	public ResultSet query(String sql, Object... pras) {
 		con = getCon();
 		try {
